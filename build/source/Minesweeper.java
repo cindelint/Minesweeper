@@ -75,7 +75,7 @@ public void displayLosingMessage()
   for (int i=0; i<NUM_ROWS; i++) {
     for (int j=0; j<NUM_COLS; j++) {
       if (bombs.contains(buttons[i][j])) {
-        buttons[i][j].marked = false;
+        // buttons[i][j].marked = false;
         buttons[i][j].clicked = true;
       }
     }
@@ -83,7 +83,7 @@ public void displayLosingMessage()
   String message = "YOU LOST";
   int begin = (NUM_COLS-message.length())/2;
   for (int i=begin; i<begin+message.length(); i++) {
-    buttons[10][i].setLabel(message.charAt(i) + "");
+    buttons[10][i].setLabel(message.charAt(i-begin) + "");
   }
 }
 public void displayWinningMessage()
@@ -119,6 +119,9 @@ public class MSButton {
     public void mousePressed() {
         if (mouseButton == LEFT) {
           clicked = true;
+          if (bombs.contains(this)) {
+            displayLosingMessage();
+          }
         }
         if (mouseButton == RIGHT && !marked) {
           marked = true;
@@ -132,7 +135,6 @@ public class MSButton {
             fill(0);
         else if(clicked && bombs.contains(this)) {
              fill(255,0,0);
-             displayLosingMessage();
            }
         else if(clicked)
             fill(200);
@@ -150,13 +152,16 @@ public class MSButton {
               }
             }
           } else {
-            fill(0);
-            text(label,x+width/2,y+height/2);
+            showLabel();
           }
         }
     }
     public void setLabel(String newLabel) {
         label = newLabel;
+    }
+    public void showLabel() {
+      fill(120 - max(2,Integer.parseInt(label)) * 20, Integer.parseInt(label) * 60, max(3,Integer.parseInt(label)) * 60);
+      text(label,x+width/2,y+height/2);
     }
     public boolean isValid(int r, int c) {
       if (r >= 0 && r < NUM_ROWS && c >= 0 && c < NUM_COLS) {
