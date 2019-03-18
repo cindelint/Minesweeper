@@ -19,6 +19,8 @@ public class Minesweeper extends PApplet {
 
 
 
+PFont Font1;
+
 public static final int NUM_ROWS = 20;
 public static final int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
@@ -28,6 +30,7 @@ public static final int NUM_BOMBS = 40;
 public void setup () {
     
     textAlign(CENTER,CENTER);
+    Font1 = createFont("Arial Bold", 13);
 
     // make the manager / starts GUIDO
     Interactive.make( this );
@@ -83,7 +86,8 @@ public void displayLosingMessage()
   String message = "YOU LOST";
   int begin = (NUM_COLS-message.length())/2;
   for (int i=begin; i<begin+message.length(); i++) {
-    buttons[10][i].setLabel(message.charAt(i-begin) + "");
+    buttons[9][i].setLabel(message.charAt(i-begin) + "");
+    buttons[9][i].showLabel();
   }
 }
 public void displayWinningMessage()
@@ -151,7 +155,7 @@ public class MSButton {
                 }
               }
             }
-          } else {
+          } else if (Character.isDigit(label.charAt(0))){
             showLabel();
           }
         }
@@ -160,7 +164,12 @@ public class MSButton {
         label = newLabel;
     }
     public void showLabel() {
-      fill(120 - max(2,Integer.parseInt(label)) * 20, Integer.parseInt(label) * 60, max(3,Integer.parseInt(label)) * 60);
+      if (Character.isDigit(label.charAt(0))) {
+        fill(120 - max(2,Integer.parseInt(label)) * 20, Integer.parseInt(label) * 60, max(3,Integer.parseInt(label)) * 60);
+      } else {
+        fill(0);
+      }
+      textFont(Font1);
       text(label,x+width/2,y+height/2);
     }
     public boolean isValid(int r, int c) {
