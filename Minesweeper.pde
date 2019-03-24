@@ -73,7 +73,7 @@ public void displayLosingMessage()
   int begin = (NUM_COLS-message.length())/2;
   for (int i=begin; i<begin+message.length(); i++) {
     //String letter = message.charAt(i-begin) + "";
-    String letter = "TEST"
+    String letter = "T"
     buttons[9][i].setLabel(letter);
     buttons[9][i].clicked = true;
   }
