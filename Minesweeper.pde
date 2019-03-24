@@ -72,10 +72,9 @@ public void displayLosingMessage()
   String message = "YOU LOST :(";
   int begin = (NUM_COLS-message.length())/2;
   for (int i=begin; i<begin+message.length(); i++) {
-    //String letter = message.charAt(i-begin) + "";
-    String letter = "T"
-    buttons[9][i].setLabel(letter);
+    String letter = message.charAt(i-begin) + "";
     buttons[9][i].clicked = true;
+    buttons[9][i].setLabel(letter);
   }
 }
 public void displayWinningMessage()
