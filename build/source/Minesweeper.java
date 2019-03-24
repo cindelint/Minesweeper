@@ -87,7 +87,7 @@ public void displayLosingMessage()
       }
     }
   }
-  String message = "YOU LOST";
+  String message = "YOU LOST :(";
   int begin = (NUM_COLS-message.length())/2;
   for (int i=begin; i<begin+message.length(); i++) {
     buttons[9][i].setLabel(message.charAt(i-begin) + "");
@@ -174,7 +174,7 @@ public class MSButton {
         label = newLabel;
     }
     public void showLabel() {
-      if (Character.isDigit(label.charAt(0))) {
+      if (checkInt(label)) {
         fill(120 - max(2,Integer.parseInt(label)) * 20, Integer.parseInt(label) * 60, max(3,Integer.parseInt(label)) * 60);
       } else {
         fill(0);
@@ -199,6 +199,16 @@ public class MSButton {
         }
         return count;
     }
+}
+
+public boolean checkInt(String s) {
+  //because Character.isDigit doesnt show up aksldfjaklg
+  for (int i=0; i<8; i++) {
+    if (s.equals(i + "")) {
+      return true;
+    }
+  }
+  return false;
 }
   public void settings() {  size(400, 400); }
   static public void main(String[] passedArgs) {
