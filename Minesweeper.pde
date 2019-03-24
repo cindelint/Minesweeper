@@ -7,7 +7,7 @@ public static final int NUM_ROWS = 20;
 public static final int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs; //ArrayList of just the minesweeper buttons that are mined
-public static final int NUM_BOMBS = 40;
+public static final int NUM_BOMBS = 80;
 
 void setup () {
     size(400, 400);
@@ -52,15 +52,19 @@ public void draw ()
         displayWinningMessage();
 }
 public boolean isWon() {
-
-    return false;
+    for (int i=0; i<bombs.size(); i++) {
+      if (!bombs.get(i).marked) {
+        return false;
+      }
+    }
+    return true;
 }
 public void displayLosingMessage()
 {
   for (int i=0; i<NUM_ROWS; i++) {
     for (int j=0; j<NUM_COLS; j++) {
       if (bombs.contains(buttons[i][j])) {
-        // buttons[i][j].marked = false;
+        buttons[i][j].marked = false;
         buttons[i][j].clicked = true;
       }
     }
@@ -69,12 +73,16 @@ public void displayLosingMessage()
   int begin = (NUM_COLS-message.length())/2;
   for (int i=begin; i<begin+message.length(); i++) {
     buttons[9][i].setLabel(message.charAt(i-begin) + "");
-    buttons[9][i].showLabel();
+    buttons[9][i].clicked = true;
   }
 }
 public void displayWinningMessage()
 {
-    //your code here
+  String message = "YOU WON!!";
+  int begin = (NUM_COLS-message.length())/2;
+  for (int i=begin; i<begin+message.length(); i++) {
+    buttons[9][i].setLabel(message.charAt(i-begin) + "");
+  }
 }
 
 public class MSButton {
@@ -120,7 +128,7 @@ public class MSButton {
         if (marked)
             fill(0);
         else if(clicked && bombs.contains(this)) {
-             fill(255,0,0);
+            fill(255,0,0);
            }
         else if(clicked)
             fill(200);
@@ -128,17 +136,19 @@ public class MSButton {
             fill(100);
 
         rect(x, y, width, height);
-        if (clicked && !bombs.contains(this)) {
-          if (label.equals("0")) {
-            for (int i = r-1; i <= r+1; i++) {
-              for (int j = c-1; j <= c+1; j++) {
-                if (isValid(i,j)) {
-                  buttons[i][j].clicked = true;
+        if (clicked) {
+          if (!bombs.contains(this)) {
+            if (label.equals("0")) {
+              for (int i = r-1; i <= r+1; i++) {
+                for (int j = c-1; j <= c+1; j++) {
+                  if (isValid(i,j)) {
+                    buttons[i][j].clicked = true;
+                  }
                 }
               }
+            } else {
+              showLabel();
             }
-          } else if (Character.isDigit(label.charAt(0))){
-            showLabel();
           }
         }
     }
