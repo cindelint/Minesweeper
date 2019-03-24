@@ -7,7 +7,7 @@ public static final int NUM_ROWS = 20;
 public static final int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs; //ArrayList of just the minesweeper buttons that are mined
-public static final int NUM_BOMBS = 50;
+public static final int NUM_BOMBS = 10;
 
 void setup () {
     size(400, 400);
