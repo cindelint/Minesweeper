@@ -80,7 +80,7 @@ public void displayLosingMessage()
 public void displayWinningMessage()
 {
   String message = "YOU WON!!";
-  int begin = (NUM_COLS-message.length())/2;
+  int begin = (int) ((NUM_COLS-message.length())/2);
   for (int i=begin; i<begin+message.length(); i++) {
     buttons[9][i].clicked = true;
     buttons[9][i].setLabel(message.charAt(i-begin) + "");
