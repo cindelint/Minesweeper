@@ -70,7 +70,7 @@ public void displayLosingMessage()
     }
   }
   String message = "YOU LOST :(";
-  int begin = (NUM_COLS-message.length())/2;
+  int begin = Math.floor(NUM_COLS-message.length())/2);
   println(begin);
   for (int i=begin; i<begin+message.length(); i++) {
     println(i);
