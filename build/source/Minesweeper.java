@@ -175,7 +175,7 @@ public class MSButton {
     }
     public void showLabel() {
       if (checkInt(label)) {
-        fill(120 - max(2,Integer.parseInt(label)) * 20, Integer.parseInt(label) * 60, max(3,Integer.parseInt(label)) * 60);
+        fill(120 - max(2,stringToInt(label)) * 20, stringToInt(label) * 60, max(3,stringToInt(label)) * 60);
       } else {
         fill(0);
       }
@@ -203,12 +203,24 @@ public class MSButton {
 
 public boolean checkInt(String s) {
   //because Character.isDigit doesnt show up aksldfjaklg
-  for (int i=0; i<8; i++) {
+  //prereq: only 0 to 8
+  for (int i=0; i<9; i++) {
     if (s.equals(i + "")) {
       return true;
     }
   }
   return false;
+}
+
+public int stringToInt(String s) {
+  //because Integer.parseInt doesnt work EITHER
+  //prereq: only one-digit integer strings
+  for (int i=0; i<9; i++) {
+    if (s.equals(i + "")) {
+      return i;
+    }
+  }
+  return -1;
 }
   public void settings() {  size(400, 400); }
   static public void main(String[] passedArgs) {
