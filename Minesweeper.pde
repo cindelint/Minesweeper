@@ -69,7 +69,7 @@ public void displayLosingMessage()
       }
     }
   }
-  String message = "YOU LOST";
+  String message = "YOU LOST :(";
   int begin = (NUM_COLS-message.length())/2;
   for (int i=begin; i<begin+message.length(); i++) {
     buttons[9][i].setLabel(message.charAt(i-begin) + "");
