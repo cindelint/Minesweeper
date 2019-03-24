@@ -25,7 +25,7 @@ public static final int NUM_ROWS = 20;
 public static final int NUM_COLS = 20;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs; //ArrayList of just the minesweeper buttons that are mined
-public static final int NUM_BOMBS = 80;
+public static final int NUM_BOMBS = 10;
 
 public void setup () {
     
@@ -100,6 +100,7 @@ public void displayWinningMessage()
   String message = "YOU WON!!";
   int begin = (NUM_COLS-message.length())/2;
   for (int i=begin; i<begin+message.length(); i++) {
+    buttons[9][i].clicked = true;
     buttons[9][i].setLabel(message.charAt(i-begin) + "");
   }
 }
